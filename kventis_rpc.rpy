@@ -31,7 +31,7 @@ init python in kventis_rpc:
         else:
             store.mas_submod_utils.submod_log.error("[Discord RPC] " + msg)
 
-    dis_client_id = '977282947981910026'
+    client_id = '977282947981910026'
     client = None
     custom_rpc_file_path = os.path.join(renpy.config.basedir, "./custom_presense.txt")
     custom_rpc_file = None
@@ -48,8 +48,6 @@ init python in kventis_rpc:
     if store.persistent.rpc_use_custom is None:
         store.persistent.rpc_use_custom = False
 
-    print store.persistent.rpc_first 
-    print store.persistent.rpc_first is None
     if store.persistent.rpc_first is None:
         store.persistent.rpc_enabled = False
 
@@ -67,6 +65,7 @@ init python in kventis_rpc:
     }
     loading_act = {
         'details': 'Waiting for RPC...',
+        'state': 'waiting for next ch30_minute',
         'timestamps': {
             'start': start_time
         },
@@ -76,6 +75,7 @@ init python in kventis_rpc:
         }
     }
 
+    # Event obj kinda pointless coulda used dict
     class RPC_Event(object):
         def __init__(self, content, ticks):
             self.content = content
@@ -84,6 +84,7 @@ init python in kventis_rpc:
         def tick(self):
             self.ticks = self.ticks - 1
 
+    # Honestly hate python2 classes
     class DiscordClientUni(object):
         def __init__(self):
             self.s_sock = None
@@ -135,7 +136,7 @@ init python in kventis_rpc:
             return self.read()
 
         def handshake(self):
-            ret_op, ret_data = self.send_read({'v': 1, 'client_id': dis_client_id}, op=0)
+            ret_op, ret_data = self.send_read({'v': 1, 'client_id': client_id}, op=0)
             if ret_op == 1 and ret_data['cmd'] == 'DISPATCH' and ret_data['evt'] == 'READY':
                 return
             else:
@@ -272,10 +273,12 @@ init python in kventis_rpc:
             self.s_sock.write(data)
             self.s_sock.flush()
 
+    # Adds event to the queue
     def add_rpc_event(content, ticks):
         rpc_event = RPC_Event(content, ticks)
         special_queue.append(rpc_event)
 
+    # Generates client based on platform cuz windows cringe
     def gen_client():
         # Unix 💪
         if platform.platform() == 'Windows':
@@ -283,6 +286,7 @@ init python in kventis_rpc:
         else:
             return DiscordClientUnix() 
 
+    # Toggles client on/off
     def toggle_rpc():
         if store.persistent.rpc_enabled:
             store.persistent.rpc_enabled = False
@@ -321,6 +325,7 @@ init python in kventis_rpc:
 
             store.mas_submod_utils.registerFunction("quit", client.close)
 
+    # Runs with ch30_minute updates activity with new data
     def update_activity(client):
         ping = None
         # Ping RPC server to check connection is still alive
@@ -330,6 +335,10 @@ init python in kventis_rpc:
             # Pings every minute uneeded logging
         except:
             pass
+
+        # Can be used to get current idle callback label
+        # Not great but can be used in the register
+        # print store.mas_idle_mailbox.read(3)
 
         # Ping failed so reconnect
         if ping == None:
@@ -349,15 +358,18 @@ init python in kventis_rpc:
             if special_queue[0].ticks <= 0:
                 special_queue.pop(0)
 
+        # All other checks
         elif store.persistent.rpc_use_custom and custom_rpc_file != 'auto':
             new_act['state'] = custom_rpc_file
 
+        # Finally set activity
         try:
             client.activity(new_act)
         except:
             log('warn', 'Failed to set activity: ' + str(e))
 
-    def update_custom():
+    # get custom file
+    def read_custom():
         global custom_rpc_file
         if os.path.exists(custom_rpc_file_path):
             with open(custom_rpc_file_path, "r") as f:
@@ -375,6 +387,7 @@ init python in kventis_rpc:
                 f.write("auto")
                 f.close
 
+
     client = gen_client()
 
     if store.persistent.rpc_enabled:
@@ -391,10 +404,11 @@ init python in kventis_rpc:
             args=[client]
         )
 
+        # Important otherwise things get messy after a certain ammount of MAS restarts without computer reboot
         store.mas_submod_utils.registerFunction("quit", client.close)
 
     if store.persistent.rpc_use_custom:
-        update_custom()
+        read_custom()
 
 
 # Runs once when first installed
@@ -408,24 +422,25 @@ init 5 python:
         )
     )
 
-init 5 python:
-    addEvent(
-        Event(
-            persistent.event_database,
-            eventlabel="kventis_rpc_installed_talk",
-            prompt="Can you tell me about RPC?",
-            category=['dev'],
-            pool=True,
-            unlocked=True,
-        ),
-        markSeen=False
-)
+# Was only needed for testing
+# init 5 python:
+#     addEvent(
+#         Event(
+#             persistent.event_database,
+#             eventlabel="kventis_rpc_installed_talk",
+#             prompt="Can you tell me about RPC?",
+#             category=['dev'],
+#             pool=True,
+#             unlocked=True,
+#         ),
+#         markSeen=False
+# )
 
-label kventis_rpc_installed_talk:
-    call kventis_rpc_installed
-    return
+# label kventis_rpc_installed_talk:
+#     call kventis_rpc_installed
+#     return
 
-
+# Needs proof-reading and expressions
 label kventis_rpc_installed:
     $ import store
     m "[player], I see you added some .rpy files"

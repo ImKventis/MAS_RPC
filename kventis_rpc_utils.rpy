@@ -22,6 +22,6 @@ screen kventis_rpc_setting_pane():
 
                 
                 textbutton _("Reload custom message"):
-                    action Function(store.kventis_rpc.update_custom)
+                    action Function(store.kventis_rpc.read_custom)
                     hovered SetField(submods_screen_tt, "value", ("Reloads custom_presence.txt. Give up to a minute for the RPC to load."))
                     unhovered SetField(submods_screen_tt, "value", submods_screen_tt.default)
