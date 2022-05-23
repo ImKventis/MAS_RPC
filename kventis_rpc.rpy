@@ -33,9 +33,11 @@ init python in kventis_rpc:
 
     client_id = '977282947981910026'
     client = None
-    custom_rpc_file_path = os.path.join(renpy.config.basedir, "./custom_presense.txt")
+    rpc_base = os.path.join(renpy.config.basedir, "./rpc/")
+    custom_rpc_file_path = os.path.join(rpc_base, "custom_presense.txt")
     custom_rpc_file = None
-    special_queue = []
+    rpc_last_brb = None
+    rpc_last_brb_label = None
     
     #Store
     # store.persistent.rpc_enabled = store.persistent.rpc_enabled
@@ -47,6 +49,12 @@ init python in kventis_rpc:
     
     if store.persistent.rpc_use_custom is None:
         store.persistent.rpc_use_custom = False
+
+    if store.persistent.rpc_use_brb_status is None:
+        store.persistent.rpc_use_brb_status = True
+
+    if store.persistent.rpc_use_room_status is None:
+        store.persistent.rpc_use_room_status = True
 
     if store.persistent.rpc_first is None:
         store.persistent.rpc_enabled = False
@@ -63,6 +71,7 @@ init python in kventis_rpc:
             'large_image': 'maslogo',
         }
     }
+    # loads when ch30-minute hasnt been updated yet
     loading_act = {
         'details': 'Waiting for RPC...',
         'state': 'waiting for next ch30_minute',
@@ -75,16 +84,153 @@ init python in kventis_rpc:
         }
     }
 
-    # Event obj kinda pointless coulda used dict
-    class RPC_Event(object):
-        def __init__(self, content, ticks):
-            self.content = content
-            self.ticks = ticks
 
-        def tick(self):
-            self.ticks = self.ticks - 1
+    def check_ani():
+        if store.mas_anni.isAnni():
+            return "Today is our " + store.mas_anni.anniCount() + " year anniversary!"
+        if store.mas_anni.isAnniSixMonth():
+            return "Today is our 6 month anniversary!"
+        if store.mas_anni.isAnniThreeMonth():
+            return "Today is our 3 month anniversary!"
+        if store.mas_anni.isAnniOneMonth():
+            return "Today is our first one month anniversary!"
+        if store.mas_anni.isAnniWeek():
+            return "Today is our first week anniversary!"
+        return None
+        
+        
 
-    # Honestly hate python2 classes
+    # Runs with ch30_minute updates activity with new data
+    def update_activity(client):
+        import random
+
+        ping = None
+        # Ping RPC server to check connection is still alive
+        try:
+            ping = client.ping()
+        except:
+            pass
+
+        # Ping failed so reconnect
+        if ping == None:
+            try:
+                client.reconnect()
+            except:
+                # Failed to reconnect try again in a minute and dont bother setting activity
+                return
+
+        new_act = dict(default_act)
+        new_act['details'] = new_act['details'] + store.m_name
+
+        # Custom message
+        if store.persistent.rpc_use_custom and custom_rpc_file != 'auto':
+            new_act['details'] = custom_rpc_file
+        
+        # Brb check
+        # If the last brb_label is the same as the current label
+        # then dont pick again otherwise the presence will keep changing every minute and it just looks weird imo
+        elif store.persistent.rpc_use_brb_status and store.mas_idle_mailbox.read(3) is not None:
+            cur_brb_label = store.mas_idle_mailbox.read(3)
+            # Prevnts picking random every minute cuz thats stupid
+            if cur_brb_label == store.kventis_rpc.rpc_last_brb_label:
+                new_act['details'] = store.kventis_rpc.rpc_last_brb.format(monika=store.m_name)
+            else:
+                brb_text = store.kventis_rpc_reg.BRB_TEXT_MAP.get(cur_brb_label, None)
+                if brb_text is not None:
+                    if isinstance(brb_text, list):
+                        brb_text = random.choice(brb_text)
+                    new_act['details'] = brb_text.format(monika=store.m_name)
+                    store.kventis_rpc.rpc_last_brb = brb_text
+                    store.kventis_rpc.rpc_last_brb_label = cur_brb_label
+
+        # Location data and aniversary check
+        ani = check_ani()
+        if ani is None and store.persistent.rpc_use_room_status:
+            room_text = store.kventis_rpc_reg.ROOM_TEXT_MAP.get(store.persistent._mas_current_background, None)
+            room = store.mas_background.BACKGROUND_MAP.get(store.persistent._mas_current_background, None)
+            if room_text is None and room is None:
+                new_act['state'] = "In the " + store.persistent._mas_current_background
+            elif room_text is None:
+                new_act['state'] = "In the " + room.prompt
+            else:
+                new_act['state'] = "In the spaceroom"
+        elif ani is not None:
+            new_act['state'] = ani
+        
+
+        # Finally set activity
+        try:
+            client.activity(new_act)
+        except Exception as e:
+            log('warn', 'Failed to set activity: ' + str(e))
+
+    # get custom file
+    def read_custom():
+        global custom_rpc_file
+        if os.path.exists(custom_rpc_file_path):
+            with open(custom_rpc_file_path, "r") as f:
+                custom_rpc_file = f.read()
+                f.close()
+            if len(custom_rpc_file) == 0:
+                store.persistent.rpc_use_custom = False
+                log("warn", "Custom RPC file is empty, disabling custom RPC")
+            elif len(custom_rpc_file) > 200:
+                store.persistent.rpc_use_custom = False
+                log("warn", "Custom RPC file is too long, disabling custom RPC")
+        else:
+            log("info", "Custom RPC file not found, creating default")
+            if not os.path.exists(rpc_base):
+                try:
+                    os.mkdir(rpc_base)
+                except:
+                    log('warn', 'Cannot make path' + rpc_base + ' all RPC custom will be disabled')
+                    return
+            with open(custom_rpc_file_path, "w+") as f:
+                f.seek(0,2) # Windows
+                f.write("auto")
+                f.close
+        return
+
+    # Toggles client on/off
+    def toggle_rpc():
+        if store.persistent.rpc_enabled:
+            store.persistent.rpc_enabled = False
+
+            try:
+                client.close()
+            except Exception as e:
+                log('warn', 'Failed to close.: ' + str(e))
+
+            log('info', 'RPC Disabled')
+
+            store.mas_submod_utils.unregisterFunction(
+                "ch30_minute",
+                update_activity
+            )
+
+            store.mas_submod_utils.unregisterFunction("quit", client.close)
+            return
+        else:
+            store.persistent.rpc_enabled = True
+            try:
+                client.start()
+            except Exception as e:
+                log('error', "Failed to start client " + str(e))
+            log('info', 'RPC Enabled')
+
+            if client.connected:
+                update_activity(client)
+
+
+            store.mas_submod_utils.registerFunction(
+                "ch30_minute",
+                update_activity,
+                args=[client]
+            )
+
+            store.mas_submod_utils.registerFunction("quit", client.close)
+            return
+
     class DiscordClientUni(object):
         def __init__(self):
             self.s_sock = None
@@ -223,10 +369,12 @@ init python in kventis_rpc:
                     except OSError as e:
                         pass
                     except:
+                        log('error', 'Problem starting socket ' + str(e))
                         return False
                     else:
                         return True
             else:
+                log('warn', 'Could not find discord socket unable to start RPC')
                 return False
 
         def receive(self, size):
@@ -255,14 +403,15 @@ init python in kventis_rpc:
             for i in range(10):
                 pos_path = main_path.format(i)
                 try: 
-                    self._s_sock = open(pos_path, "w+b")
+                    self.s_sock = open(pos_path, "w+b")
                 except:
-                    # Didnt find path that sucks
+                    # Didnt find path that doesnt suck
                     pass
                 else:
-                    # Found a path that works thats cool
+                    # Found a path that does suck and works thats cool
                     return True
             else:
+                log('error', 'Could not find a vaild path for discord RPC')
                 # Cringe tbh
                 return False
 
@@ -270,123 +419,20 @@ init python in kventis_rpc:
             return self.s_sock.read(size)
 
         def write(self, data):
+            # Seriously dont understand windows what is the point in 
+            # any of this
+            self.s_sock.seek(0,2)
             self.s_sock.write(data)
             self.s_sock.flush()
 
-    # Adds event to the queue
-    def add_rpc_event(content, ticks):
-        rpc_event = RPC_Event(content, ticks)
-        special_queue.append(rpc_event)
-
-    # Generates client based on platform cuz windows cringe
     def gen_client():
         # Unix 💪
-        if platform.platform() == 'Windows':
+        if renpy.windows:
+            log('info', 'Creating windows client')
             return DiscordClientWin()
-        else:
+        else:        
+            log('info', 'Creating unix client')
             return DiscordClientUnix() 
-
-    # Toggles client on/off
-    def toggle_rpc():
-        if store.persistent.rpc_enabled:
-            store.persistent.rpc_enabled = False
-
-            try:
-                client.close()
-            except Exception as e:
-                log('warn', 'Failed to close.: ' + str(e))
-
-            log('info', 'RPC Disabled')
-
-            store.mas_submod_utils.unregisterFunction(
-                "ch30_minute",
-                update_activity
-            )
-
-            store.mas_submod_utils.unregisterFunction("quit", client.close)
-
-        else:
-            store.persistent.rpc_enabled = True
-            try:
-                client.start()
-            except Exception as e:
-                log('error', "Failed to start client " + str(e))
-            log('info', 'RPC Enabled')
-
-            if client.connected:
-                update_activity(client)
-
-
-            store.mas_submod_utils.registerFunction(
-                "ch30_minute",
-                update_activity,
-                args=[client]
-            )
-
-            store.mas_submod_utils.registerFunction("quit", client.close)
-
-    # Runs with ch30_minute updates activity with new data
-    def update_activity(client):
-        ping = None
-        # Ping RPC server to check connection is still alive
-        try:
-            ping = client.ping()
-            # log('info', 'Ping: ok')
-            # Pings every minute uneeded logging
-        except:
-            pass
-
-        # Can be used to get current idle callback label
-        # Not great but can be used in the register
-        # print store.mas_idle_mailbox.read(3)
-
-        # Ping failed so reconnect
-        if ping == None:
-            try:
-                client.reconnect()
-            except:
-                # Failed to reconnect try again in a minute and dont bother setting activity
-                return
-
-        new_act = dict(default_act)
-        new_act['details'] = new_act['details'] + store.m_name
-
-        # special events usually timed.  
-        if len(special_queue) > 0:
-            new_act.update({'state': special_queue[0].content})
-            special_queue[0].tick()
-            if special_queue[0].ticks <= 0:
-                special_queue.pop(0)
-
-        # All other checks
-        elif store.persistent.rpc_use_custom and custom_rpc_file != 'auto':
-            new_act['state'] = custom_rpc_file
-
-        # Finally set activity
-        try:
-            client.activity(new_act)
-        except:
-            log('warn', 'Failed to set activity: ' + str(e))
-
-    # get custom file
-    def read_custom():
-        global custom_rpc_file
-        if os.path.exists(custom_rpc_file_path):
-            with open(custom_rpc_file_path, "r") as f:
-                custom_rpc_file = f.read()
-                f.close()
-            if len(custom_rpc_file) == 0:
-                store.persistent.rpc_use_custom = False
-                log("warn", "Custom RPC file is empty, disabling custom RPC")
-            elif len(custom_rpc_file) > 200:
-                store.persistent.rpc_use_custom = False
-                log("warn", "Custom RPC file is too long, disabling custom RPC")
-        else:
-            log("info", "Custom RPC file not found, creating default")
-            with open(custom_rpc_file_path, "w+") as f:
-                f.write("auto")
-                f.close
-
 
     client = gen_client()
 
@@ -409,65 +455,3 @@ init python in kventis_rpc:
 
     if store.persistent.rpc_use_custom:
         read_custom()
-
-
-# Runs once when first installed
-init 5 python:
-    addEvent(
-        Event(
-            persistent.event_database,
-            eventlabel="kventis_rpc_installed",
-            conditional="True",
-            action=EV_ACT_QUEUE,
-        )
-    )
-
-# Was only needed for testing
-# init 5 python:
-#     addEvent(
-#         Event(
-#             persistent.event_database,
-#             eventlabel="kventis_rpc_installed_talk",
-#             prompt="Can you tell me about RPC?",
-#             category=['dev'],
-#             pool=True,
-#             unlocked=True,
-#         ),
-#         markSeen=False
-# )
-
-# label kventis_rpc_installed_talk:
-#     call kventis_rpc_installed
-#     return
-
-# Needs proof-reading and expressions
-label kventis_rpc_installed:
-    $ import store
-    m "[player], I see you added some .rpy files"
-    m "Let's have a look inside.{w=0.3}.{w=0.3}."
-    m "Oh a RPC client for discord!"
-    m "Thanks, [player]!"
-    m "Should I connect now?{nw}"
-    $ _history_list.pop()
-    $ menu_res = False
-    menu:
-        m "Should I connect now?{fast}"
-        "Yes.":
-            $ menu_res = True
-        "No.":
-            # Jump to beginning
-            pass
-    
-    if menu_res:
-        m "Connecting now..."
-        $ kventis_rpc.toggle_rpc()
-        $ kventis_rpc.add_rpc_event("Hey everyone! - Monika", 3)
-        m "RPC is ready to go!"
-        m "I even added a little message for 3 minutes!"
-    else:
-        m "Oh okay."
-        m "You can enable it from the \"SubMods\" menu."
-
-    m "Thanks for this again."
-    $ store.persistent.rpc_first = False
-    return

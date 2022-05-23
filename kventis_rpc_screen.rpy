@@ -20,8 +20,14 @@ screen kventis_rpc_setting_pane():
                     hovered SetField(submods_screen_tt, "value", ("Uses custom_presense.txt instead of generating one."))
                     unhovered SetField(submods_screen_tt, "value", submods_screen_tt.default)
 
-                
-                textbutton _("Reload custom message"):
-                    action Function(store.kventis_rpc.read_custom)
-                    hovered SetField(submods_screen_tt, "value", ("Reloads custom_presence.txt. Give up to a minute for the RPC to load."))
+                textbutton _("Brb status"):
+                    action ToggleField(persistent, 'rpc_use_brb_status')
+                    selected persistent.rpc_use_brb_status
+                    hovered SetField(submods_screen_tt, "value", ("Use the built in brb statuses"))
+                    unhovered SetField(submods_screen_tt, "value", submods_screen_tt.default)
+
+                textbutton _("Room status"):
+                    action ToggleField(persistent, 'rpc_use_room_status')
+                    selected persistent.rpc_use_room_status
+                    hovered SetField(submods_screen_tt, "value", ("Mentions what room you are in on the RP"))
                     unhovered SetField(submods_screen_tt, "value", submods_screen_tt.default)

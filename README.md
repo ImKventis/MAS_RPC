@@ -1,1 +1,2 @@
-IDLE_MODE_CB_LABEL
+# Monika After Story RPC
+Monika after story rpc

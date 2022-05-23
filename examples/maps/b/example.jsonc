@@ -1,0 +1,11 @@
+{
+
+    /* Replicate this json with a custom file name for your submod
+    simply set text for your custom callback and RPC will do the rest
+    examples are below
+    */
+
+    // {monika} replaced with Monika nickanme
+    "brb_eating_callback": "Enjoying a meal with {monika}",
+    "brb_watching_movie_callback": "Watching a movie with {monika}"
+}
