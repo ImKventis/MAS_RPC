@@ -1,7 +1,14 @@
 # Dialogue
 
 
+"""
+    Thanks to https://www.reddit.com/user/my-otter-self for Monika Dialogue!
+    :)
+"""
+
+
 # Runs once when first installed
+# Monika talks about wishing she could access discord so maybe?
 init 5 python:
     addEvent(
         Event(
@@ -18,7 +25,7 @@ label kventis_rpc_installed:
     return
 
 # Explains RPC and the features
-# Updates every minute
+# RPC Updates every minute
 # Brb status = Changes the status based on which beb has been selected
 # Custom message = Uses the message from rpc/custom_presence.txt above all else
 # Room status = Changes the status based on the room the user is in
@@ -27,14 +34,17 @@ init 5 python:
     addEvent(
         Event(
             persistent.event_database,
-            eventlabel="kventis_rpc_installed",
-            conditional="True",
-            action=EV_ACT_QUEUE,
-        )
+            eventlabel="monika_rpc_explain",
+            prompt="Can you explain RPC?",
+            category=['rpc'],
+            pool=True,
+            unlocked=True,
+        ),
+        markSeen=False
     )
 
 # Needs doing
-label kventis_rpc_installed:
+label monika_rpc_explain:
     m "Placeholder"
     return
 
