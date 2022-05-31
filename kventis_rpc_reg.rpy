@@ -20,37 +20,46 @@ init python in kventis_rpc_reg:
     rpc_r_maps = os.path.join(rpc_maps, "./r/")
     failed_make_paths = False
 
-    if not os.path.exists(rpc_maps):
-        #cringe
-        try:
-            os.mkdir(rpc_maps)
-        except:
-            failed_make_paths = True
-        
-    if not os.path.exists(rpc_b_maps):
-        try:
-            os.mkdir(rpc_b_maps)
-        except:
-            failed_make_paths = True
-    
-    if not os.path.exists(rpc_r_maps):
-        try:
-            os.mkdir(rpc_r_maps)
-        except:
-            failed_make_paths = True
-    
+    def checkpath(path):
+        global failed_make_paths
+        import os
+        failed_make_paths = False
 
+        if not os.path.exists(path):
+            try:
+                os.makedirs(path)
+            except:
+                store.mas_submod_utils.submod_log.info('warn', 'Failed to make path: ' + path)
+                failed_make_paths = True
+    
+    checkpath(rpc_maps)
+    checkpath(rpc_b_maps)
+    checkpath(rpc_r_maps)
+
+
+    # Brb text map turns idle callbacks into text for RPC
+    # Can be single string (eh..)
+    # Can be List of strings for varity (yay!!!)
+    # {monika} will be replaced with Monika nickname at update time
     BRB_TEXT_MAP = {
         'monika_brb_idle_callback' : 'AFK',
-        'monika_writing_idle_callback' : 'Reading with {monika}',
+        'monika_writing_idle_callback' : 'Writing with {monika}',
         'monika_idle_game_callback' : 'Gaming with {monika}',
         'monika_idle_coding_callback' : 'Coding away with {monika}',
+        'monika_idle_reading_callback': 'Reading with {monika}'
         'monika_idle_workout_callback' : 'Working out with {monika}',
         'monika_idle_nap_callback' : 'Napping',
+        'monika_idle_shower_callback': 'Showeing'
         'monika_idle_homework_callback' : 'Doing homework',
         'monika_idle_working_callback' : 'Working on something',
         'monika_idle_screen_break_callback' : ['Taking a break from the screen', 'Touching grass'],
         'monika_writing_idle_callback' : 'Writing something',
+        # u/geneTechnician watching SubMod
+        # Suggested by u/lost_localcat
+        '_mas_watching_you_draw': "Drawing with {monika}",
+        '_mas_watching_you_game': "Gaming with {monika}",
+        '_mas_watching_you_code': ["Creating bugs with {monika}", "Developing with {monika}", "Coding with {monika}", "127.0.0.1/{monika}", "def {monika}() -> 'love'"],
+        '_watching': "Watching something with {monika}"
     }
     
     # List of rooms id to text
