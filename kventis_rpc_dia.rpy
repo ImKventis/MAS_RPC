@@ -121,6 +121,28 @@ label monika_rpc_toggle_room:
         $ store.persistent.rpc_use_room_status = True
         m "I enabled the RPC room status, [player]!"
     return
+    
+init 5 python:
+    addEvent(
+        Event(
+            persistent.event_database,
+            eventlabel="monika_rpc_toggle_brb",
+            prompt="Can you toggle a RPC brb status?",
+            category=['rpc'],
+            pool=True,
+            unlocked=True,
+        ),
+        markSeen=False
+    )
+
+label monika_rpc_toggle_brb:
+    if store.persistent.rpc_use_brb_status:
+        $ store.persistent.rpc_use_brb_status = False
+        m "I disabled the RPC room status, [player]!"
+    else:
+        $ store.persistent.rpc_use_brb_status = True
+        m "I enabled the RPC room status, [player]!"
+    return
 
 init 5 python:
     addEvent(
