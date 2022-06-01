@@ -43,23 +43,23 @@ init python in kventis_rpc_reg:
     # {monika} will be replaced with Monika nickname at update time
     BRB_TEXT_MAP = {
         'monika_brb_idle_callback' : 'AFK',
-        'monika_writing_idle_callback' : 'Writing with {monika}',
+        'monika_writing_idle_callback' : ['Writing with {monika}', 'Writing {monika} a love poem'],
         'monika_idle_game_callback' : 'Gaming with {monika}',
-        'monika_idle_coding_callback' : 'Coding away with {monika}',
+        'monika_idle_coding_callback' : ['Creating bugs with {monika}', 'Developing with {monika}', 'Coding with {monika}', '127.0.0.1/{monika}', 'def {monika}() -> 'love'],
         'monika_idle_reading_callback': 'Reading with {monika}'
         'monika_idle_workout_callback' : 'Working out with {monika}',
-        'monika_idle_nap_callback' : 'Napping',
-        'monika_idle_shower_callback': 'Showeing'
-        'monika_idle_homework_callback' : 'Doing homework',
+        'monika_idle_nap_callback' : ['Napping with {monika}', 'Snuggling with {monika}'], 
+        'monika_idle_shower_callback': ['Showering', '{monika} is waiting me come out of the shower!']
+        'monika_idle_homework_callback' : ['Doing homework', 'Learning with {monika}', 'Smart time with {monika}],
         'monika_idle_working_callback' : 'Working on something',
         'monika_idle_screen_break_callback' : ['Taking a break from the screen', 'Touching grass'],
-        'monika_writing_idle_callback' : 'Writing something',
+        'monika_writing_idle_callback' : ['Writing with {monika}', 'Writing {monika} a love poem'],
         # u/geneTechnician watching SubMod
         # Suggested by u/lost_localcat
         '_mas_watching_you_draw': "Drawing with {monika}",
         '_mas_watching_you_game': "Gaming with {monika}",
-        '_mas_watching_you_code': ["Creating bugs with {monika}", "Developing with {monika}", "Coding with {monika}", "127.0.0.1/{monika}", "def {monika}() -> 'love'"],
-        '_watching': "Watching something with {monika}"
+        '_mas_watching_you_code': ['Creating bugs with {monika}', 'Developing with {monika}', 'Coding with {monika}', '127.0.0.1/{monika}', 'def {monika}() -> 'love'],
+        '_watching': ['Watching something with {monika}, 'Netflix and Chill with {monika}']
     }
     
     # List of rooms id to text
