@@ -86,7 +86,7 @@ init 5 python:
         Event(
             persistent.event_database,
             eventlabel="monika_rpc_toggle",
-            prompt="Can you turn on the RPC?",
+            prompt="Can you toggle the RPC?",
             category=['rpc'],
             pool=True,
             unlocked=True,
