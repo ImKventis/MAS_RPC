@@ -1,10 +1,7 @@
 # Dialogue
 
 
-"""
-    Thanks to u/my-otter-self on Reddit for Monika's dialogue!
-    :) 👍
-"""
+# Thanks to u/my-otter-self on Reddit for Monika's dialogue!
 
 
 # Runs once when first installed
@@ -54,7 +51,6 @@ init 5 python:
         markSeen=False
     )
 
-# Needs doing
 label monika_rpc_explain:
     m "Of course, [player]!"
     m "A rich presence feature (RPC for short) allows an user to show on Discord what is running on their computer at the moment."
@@ -194,4 +190,35 @@ label monika_rpc_reload_custom:
     m "Reloading custom RPC message..."
     $ store.kventis_rpc.read_custom()
     m "Done!"
+    return # Return otherwise other labels start playing
+
+init 5 python:
+    addEvent(
+        Event(
+            persistent.event_database,
+            eventlabel="monika_rpc_change_icon",
+            prompt="Can you change the RPC icon?",
+            category=['rpc'],
+            pool=True,
+            unlocked=True,
+        ),
+        markSeen=False
+    )
+
+label monika_rpc_change_icon:
+    $ from store import persistent
+    $ from store.kventis_rpc_reg import ICON_MAP
+    m "Alright!"
+    
+    show monika at t21
+    call screen mas_gen_scrollable_menu(ICON_MAP, mas_ui.SCROLLABLE_MENU_TXT_MEDIUM_AREA, mas_ui.SCROLLABLE_MENU_XALIGN, ("Monika After Story logo", "def", False, False, 0))
+
+    show monika at t11
+
+    $ new_icon = _return
+    $ print new_icon
+    $ persistent.rpc_icon = str(new_icon)
+
+    m "One moment.."
+    m "The icon will update in the next minute or two!"
     return # Return otherwise other labels start playing

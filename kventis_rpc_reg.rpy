@@ -36,11 +36,6 @@ init python in kventis_rpc_reg:
     checkpath(rpc_b_maps)
     checkpath(rpc_r_maps)
 
-
-    # Brb text map turns idle callbacks into text for RPC
-    # Can be single string (eh..)
-    # Can be List of strings for varity (yay!!!)
-    # {monika} will be replaced with Monika nickname at update time
     BRB_TEXT_MAP = {
         'monika_brb_idle_callback' : 'AFK',
         'monika_writing_idle_callback' : ['Writing with {monika}', 'Writing {monika} a love poem'],
@@ -61,13 +56,21 @@ init python in kventis_rpc_reg:
         '_mas_watching_you_code': ['Creating bugs with {monika}', 'Developing with {monika}', 'Coding with {monika}', '127.0.0.1/{monika}', 'def {monika}() -> \'love\''],
         '_watching': ['Watching something with {monika}', 'Netflix and Chill with {monika}']
     }
+
+    # Map of icons to choose from
+    # DOES NOT ALLOW CUSTOM JSONS DUE TO IDIOTCORD
+    ICON_MAP = [
+        # Default mas logo
+        ("Dev Icon", "testicon", False, False),
+        ("Chibi Monika", "chibi", False, False)
+    ]
     
     # List of rooms id to text
     # none by default
     ROOM_TEXT_MAP = {}
 
     # Loads the map json and merges into BRB_TEXT_MAP
-    def load_map_file(m_type,name):
+    def load_map_file(m_type,name, map):
         import json
         path = os.path.join(m_type, name)
         store.kventis_rpc.log('info', path)
@@ -80,7 +83,7 @@ init python in kventis_rpc_reg:
                 except:
                     store.kventis_rpc.log('warn', name + ' is not a vaild json file.')
                 if j_map is not None:
-                    BRB_TEXT_MAP.update(j_map)
+                    map.update(j_map)
         else:
             store.kventis_rpc.log('warn', 'Could not load map file' + name)
 
@@ -91,9 +94,42 @@ init python in kventis_rpc_reg:
             return
 
         for file in os.listdir(rpc_b_maps):
-            load_map_file(rpc_b_maps, file)
+            load_map_file(rpc_b_maps, file, BRB_TEXT_MAP)
+
+        for file in os.listdir(rpc_r_maps):
+            load_map_file(rpc_r_maps, file, ROOM_TEXT_MAP)
 
     load_maps()
 
 
+init 5 python:
+    addEvent(
+        Event(
+            persistent.event_database,
+            eventlabel="rpc_failed_custom_empty"
+        )
+    )
 
+init 5 python:
+    addEvent(
+        Event(
+            persistent.event_database,
+            eventlabel="rpc_failed_custom_too_long"
+        )
+    )
+
+
+
+label rpc_failed_custom_empty:
+    m "[player]... I'm sorry, I couldn't find the custom_presence.txt file."
+    m "because theres nothing in it."
+    m "To prevent further problems I have disabled custom rpc message for you."
+    return
+
+label rpc_failed_custom_too_long:
+    m "[player]... I'm sorry, I couldn't find the custom_presence.txt file."
+    m "because it was too long."
+    m "To prevent further problems I have disabled custom rpc message for you."
+    return
+
+    
