@@ -13,6 +13,7 @@ This submod works with u/geneTechnician's [watching things with Monika submod](h
 - JSON files for submod creators to add own brb messages and room statuses
 - Auto-reconnect
 - Linux and Windows support (Need a MacOS tester)
+- Icon selection (In-Progress)
 
 ## Submod framework
 
