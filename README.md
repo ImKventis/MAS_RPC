@@ -16,7 +16,7 @@ This submod works with u/geneTechnician's [watching things with Monika submod](h
 
 ## Submod framework
 
-Please read [this](https://github.com/ImKventis/MONRPC/blob/main/JSONHELP.md) to understand the Jsons and Updating Activity
+Please read [this](https://github.com/ImKventis/MONRPC/blob/main/JSOHELP.MD) to understand the Jsons and Updating Activity
 
 ## Images
 
