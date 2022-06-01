@@ -131,5 +131,3 @@ label rpc_failed_custom_too_long:
     m "because it was too long."
     m "To prevent further problems I have disabled custom rpc message for you."
     return
-
-    

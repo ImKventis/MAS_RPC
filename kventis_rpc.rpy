@@ -198,6 +198,7 @@ init python in kventis_rpc:
             d['small_text'] = 'MAS'
         return d
 
+    
     def set_act(details, room, icon):
         from store import m_name
         global cur_act
@@ -264,7 +265,6 @@ init python in kventis_rpc:
     # get custom file
     # Pain
     def read_custom():
-        from store import queueEvent
         global custom_rpc_file
         if os.path.exists(custom_rpc_file_path):
             f = open(custom_rpc_file_path, "r")
@@ -277,10 +277,10 @@ init python in kventis_rpc:
             if len(custom_rpc_file) == 0:
                 store.persistent.rpc_use_custom = False
                 log("warn", "Custom RPC file is empty, disabling custom RPC")
-                queueEvent("rpc_failed_custom_empty")
+                store.queueEvent("rpc_failed_custom_empty")
             elif len(custom_rpc_file) > 200:
                 store.persistent.rpc_use_custom = False
-                queueEvent("rpc_failed_custom_too_long")
+                store.queueEvent("rpc_failed_custom_too_long")
                 log("warn", "Custom RPC file is too long, disabling custom RPC")
         else:
             log("info", "Custom RPC file not found, creating default")

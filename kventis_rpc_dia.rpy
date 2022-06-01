@@ -110,7 +110,7 @@ init 5 python:
         Event(
             persistent.event_database,
             eventlabel="monika_rpc_toggle_custom",
-            prompt="Can you toggle a custom RPC message?",
+            prompt="Can you toggle the custom RPC message?",
             category=['rpc'],
             pool=True,
             unlocked=True,
@@ -133,7 +133,7 @@ init 5 python:
         Event(
             persistent.event_database,
             eventlabel="monika_rpc_toggle_room",
-            prompt="Can you toggle a RPC room status?",
+            prompt="Can you toggle the RPC room status?",
             category=['rpc'],
             pool=True,
             unlocked=True,
@@ -155,7 +155,7 @@ init 5 python:
         Event(
             persistent.event_database,
             eventlabel="monika_rpc_toggle_brb",
-            prompt="Can you toggle a RPC brb status?",
+            prompt="Can you toggle the RPC brb status?",
             category=['rpc'],
             pool=True,
             unlocked=True,
