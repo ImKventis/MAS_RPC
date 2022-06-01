@@ -49,7 +49,7 @@ init python in kventis_rpc_reg:
         'monika_idle_reading_callback': 'Reading with {monika}',
         'monika_idle_workout_callback' : 'Working out with {monika}',
         'monika_idle_nap_callback' : ['Napping with {monika}', 'Snuggling with {monika}'], 
-        'monika_idle_shower_callback': ['Showering', '{monika} is waiting me come out of the shower!']
+        'monika_idle_shower_callback': ['Showering', '{monika} is waiting me come out of the shower!'],
         'monika_idle_homework_callback' : ['Doing homework', 'Learning with {monika}', 'Smart time with {monika}'],
         'monika_idle_working_callback' : 'Working on something',
         'monika_idle_screen_break_callback' : ['Taking a break from the screen', 'Touching grass'],
