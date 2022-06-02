@@ -204,6 +204,8 @@ init python in kventis_rpc:
         global cur_act
         act = {'timestamps': {'start': start_time}}
 
+        # print "Starting set act"
+
         if details is None:
             details = check_details()
             if details is None:
@@ -219,7 +221,6 @@ init python in kventis_rpc:
                 act['state'] = state
         else:
             act['state'] = room
-        
 
         if icon is None:
             act['assets'] = load_ass()
@@ -229,6 +230,7 @@ init python in kventis_rpc:
         # In case we need it for later
         cur_act = act
 
+
         try:
             client.activity(act)
         except Exception as e:
@@ -237,26 +239,30 @@ init python in kventis_rpc:
     def block_for(minutes):
         global block_value
         block_value += minutes
+
     # Runs with ch30_minute updates activity with new data
     def update_activity(client):
         global block_value
+
         ping = None
         # Ping RPC server to check connection is still alive
         try:
             ping = client.ping()
         except:
             pass
-
+        
+        # Connection is dead rip
         if ping is None:
             try:
-                print "trying to connect"
                 client.start()
             except:
-                # It aint happening cheif 
+                # It aint happening retry on next minute cuz cringe 
                 return
 
         # Should block
-        if block_value >= 0:
+        # Pain note: Couldnt fiqure out how why update_activity wouldnt start turns out 
+        # The ">" was the wrong way round
+        if block_value > 0:
             block_value -= 1
             return
 
@@ -469,7 +475,6 @@ init python in kventis_rpc:
             else:
                 pos_path = '/tmp'
             pos_path = os.path.join(pos_path, 'discord-ipc-{}')
-            # kventis_rpc.
             self.s_sock = socket.socket(socket.AF_UNIX)
             # Wouldnt boot forever otherwise
             self.s_sock.settimeout(3)
@@ -477,7 +482,6 @@ init python in kventis_rpc:
                 path = pos_path.format(i)
                 if os.path.exists(path):
                     try:
-                        # kventis_rpc.
                         self.s_sock.connect(path)
                     except OSError as e:
                         pass
@@ -487,7 +491,7 @@ init python in kventis_rpc:
                     else:
                         return True
             else:
-                log('warn', 'Could not find discord socket unable to start RPC')
+                log('warn', 'Could not find discord socket unable to start RPC. Possible discord is not running.')
                 return False
 
         def receive(self, size):

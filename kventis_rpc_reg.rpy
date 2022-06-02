@@ -59,19 +59,20 @@ init python in kventis_rpc_reg:
 
     # Map of icons to choose from
     # DOES NOT ALLOW CUSTOM JSONS DUE TO IDIOTCORD
+    # (name, discordassname, False, False)
     ICON_MAP = [
-        # Default mas logo
         ("Dev Icon", "testicon", False, False),
-        ("Chibi Monika", "chibi", False, False)
+        ("Chibi Monika", "chibi", False, False),
+        ("Monika Blush", "monikablush", False, False),
     ]
     
     # List of rooms id to text
-    # none by default
+    # none by default due to all rooms being custom
     ROOM_TEXT_MAP = {}
 
-    # Loads the map json and merges into BRB_TEXT_MAP
+    # Loads the map json and merges into selected map
     def load_map_file(m_type,name, map):
-        import json
+        from json import loads
         path = os.path.join(m_type, name)
         store.kventis_rpc.log('info', path)
         if os.path.exists(path):
@@ -79,11 +80,12 @@ init python in kventis_rpc_reg:
                 json_str = f.read()
                 j_map = None
                 try:
-                    j_map = json.loads(json_str)
+                    j_map = loads(json_str)
                 except:
                     store.kventis_rpc.log('warn', name + ' is not a vaild json file.')
                 if j_map is not None:
                     map.update(j_map)
+                f.close()
         else:
             store.kventis_rpc.log('warn', 'Could not load map file' + name)
 

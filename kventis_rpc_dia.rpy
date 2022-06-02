@@ -205,6 +205,7 @@ init 5 python:
         markSeen=False
     )
 
+# Place holder for RPC icon change
 label monika_rpc_change_icon:
     $ from store import persistent
     $ from store.kventis_rpc_reg import ICON_MAP
@@ -212,13 +213,66 @@ label monika_rpc_change_icon:
     
     show monika at t21
     call screen mas_gen_scrollable_menu(ICON_MAP, mas_ui.SCROLLABLE_MENU_TXT_MEDIUM_AREA, mas_ui.SCROLLABLE_MENU_XALIGN, ("Monika After Story logo", "def", False, False, 0))
-
     show monika at t11
 
     $ new_icon = _return
-    $ print new_icon
+    # str() cuz I kept getting random ints as input?
+    # Weird behaviour 
     $ persistent.rpc_icon = str(new_icon)
 
     m "One moment.."
     m "The icon will update in the next minute or two!"
     return # Return otherwise other labels start playing
+
+
+# Random talk events
+
+# init 5 python:
+#     addEvent(
+#         Event(
+#             persistent.event_database,
+#             eventlabel="rpc_how_work_ran",
+#             prompt="How does rpc work?",
+#             category=['rpc'],
+#             pool=False,
+#             random=True,
+#             unlocked=True,
+#         ),
+#         markSeen=False
+#     )
+
+# init 5 python:
+#     addEvent(
+#         Event(
+#             persistent.event_database,
+#             eventlabel="monika_rpc_how_work",
+#             prompt="How does rpc work?",
+#             category=['rpc'],
+#             pool=True,
+#             unlocked=True,
+#         ),
+#         markSeen=False
+#     )
+
+# label monika_rpc_how_work:
+#     pass
+
+# label rpc_how_work_ran:
+#     m "Hey, [player]!"
+#     m "I've looked into it and do you want to hear about how the rpc works?{nw}"
+#     $ _history_list.pop()
+#     $ wants_to_hear = False
+#     menu:
+#         m "Do you want to hear about how the rpc works?{nw}"
+#         "Yes.":
+#             wants_to_hear = True
+#         "Maybe later.":
+#             pass
+#     $ store.persistent.rpc_seen_work = True
+#     if wants_to_hear:
+#         m "Okay, I'll tell you how the rpc works!"
+#         call monika_rpc_how_work
+#     else:
+#         # Github copoilt generated 
+#         m "Okay, If you want to know how the rpc works, just ask me!"
+#     return
