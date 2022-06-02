@@ -213,7 +213,6 @@ init python in kventis_rpc:
     
     def set_act(details, room, icon):
         from store import m_name
-        print details, room, icon
         global cur_act
         act = {'timestamps': {'start': start_time}}
 
@@ -248,7 +247,6 @@ init python in kventis_rpc:
         # In case we need it for later
         cur_act = act
 
-        print act
         try:
             client.activity(act)
         except Exception as e:
