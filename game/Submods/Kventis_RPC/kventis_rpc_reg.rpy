@@ -36,6 +36,7 @@ init python in kventis_rpc_reg:
     checkpath(rpc_b_maps)
     checkpath(rpc_r_maps)
 
+    # Thanks to otter-self again for expanding these.
     BRB_TEXT_MAP = {
         'monika_brb_idle_callback' : 'AFK',
         'monika_writing_idle_callback' : ['Writing with {monika}', 'Writing {monika} a love poem'],
@@ -61,7 +62,7 @@ init python in kventis_rpc_reg:
     # DOES NOT ALLOW CUSTOM JSONS DUE TO IDIOTCORD
     # (name, discordassname, False, False)
     ICON_MAP = [
-        ("Dev Icon", "testicon", False, False),
+        ("Ribbon", "ribbon", False, False),
         ("Chibi Monika", "chibi", False, False),
         ("Monika Blush", "monikablush", False, False),
         ("Spaceroom", "spaceroom", False, False)

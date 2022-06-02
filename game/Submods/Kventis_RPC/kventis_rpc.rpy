@@ -213,6 +213,7 @@ init python in kventis_rpc:
     
     def set_act(details, room, icon):
         from store import m_name
+        print details, room, icon
         global cur_act
         act = {'timestamps': {'start': start_time}}
 
@@ -237,16 +238,22 @@ init python in kventis_rpc:
         if icon is None:
             act['assets'] = load_ass()
         else:
-            act['assets'] = icon
+            act['assets'] = {
+                'large_text': 'Monika After Story',
+                'large_image': icon,
+                'small_image': 'def',
+                'small_text': 'MAS'
+            }
 
         # In case we need it for later
         cur_act = act
 
-
+        print act
         try:
             client.activity(act)
         except Exception as e:
             log('warn', 'Failed to set activity: ' + str(e))
+        return 0
 
     def block_for(minutes):
         global block_value
@@ -569,19 +576,20 @@ init python in kventis_rpc:
     if store.persistent.rpc_enabled:
         client.start()
 
-        try:
-            client.activity(loading_act)
-        except Exception as e:
-            log('warn', 'Failed to set activity: ' + str(e))
+        # Register functions first as Exception will prevent ticking
 
         store.mas_submod_utils.registerFunction(
             "ch30_minute",
             update_activity,
             args=[client]
         )
-
         # Important otherwise things get messy after a certain ammount of MAS restarts without computer reboot
         store.mas_submod_utils.registerFunction("quit", client.close)
+
+        try:
+            client.activity(loading_act)
+        except Exception as e:
+            log('warn', 'Failed to set activity: ' + str(e))
 
     if store.persistent.rpc_use_custom:
         read_custom()
