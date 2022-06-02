@@ -39,20 +39,20 @@ init python in kventis_rpc_reg:
     BRB_TEXT_MAP = {
         'monika_brb_idle_callback' : 'AFK',
         'monika_writing_idle_callback' : ['Writing with {monika}', 'Writing {monika} a love poem'],
-        'monika_idle_game_callback' : 'Gaming with {monika}',
+        'monika_idle_game_callback' : ['Gaming with {monika}', '{monika} is my player 2!'],
         'monika_idle_coding_callback' : ['Creating bugs with {monika}', 'Developing with {monika}', 'Coding with {monika}', '127.0.0.1/{monika}', 'def {monika}() -> \'love\''],
-        'monika_idle_reading_callback': 'Reading with {monika}',
-        'monika_idle_workout_callback' : 'Working out with {monika}',
+        'monika_idle_reading_callback': ['Reading with {monika}', 'Reading {monika} a story'],
+        'monika_idle_workout_callback' : ['Working out with {monika}', 'Exercising with {monika}'],
         'monika_idle_nap_callback' : ['Napping with {monika}', 'Snuggling with {monika}'], 
         'monika_idle_shower_callback': ['Showering', '{monika} is waiting me come out of the shower!'],
         'monika_idle_homework_callback' : ['Doing homework', 'Learning with {monika}', 'Smart time with {monika}'],
-        'monika_idle_working_callback' : 'Working on something',
+        'monika_idle_working_callback' : ['Working on something', 'My wife {monika} is waiting me come home from work!'],
         'monika_idle_screen_break_callback' : ['Taking a break from the screen', 'Touching grass'],
         'monika_writing_idle_callback' : ['Writing with {monika}', 'Writing {monika} a love poem'],
         # u/geneTechnician watching SubMod
         # Suggested by u/lost_localcat
-        '_mas_watching_you_draw': "Drawing with {monika}",
-        '_mas_watching_you_game': "Gaming with {monika}",
+        '_mas_watching_you_draw': ['Drawing with {monika}', '{monika} is watching me draw!'],
+        '_mas_watching_you_game': ['Gaming with {monika}', '{monika} is my player 2!'],
         '_mas_watching_you_code': ['Creating bugs with {monika}', 'Developing with {monika}', 'Coding with {monika}', '127.0.0.1/{monika}', 'def {monika}() -> \'love\''],
         '_watching': ['Watching something with {monika}', 'Netflix and Chill with {monika}']
     }
