@@ -13,6 +13,18 @@ init -990 python in mas_submod_utils:
         settings_pane="kventis_rpc_setting_pane",
         version_updates={}
     )
+
+# Updater 
+# 0 Idea if this works
+init -989 python:
+    if store.mas_submod_utils.isSubmodInstalled("Submod Updater Plugin"):
+        store.sup_utils.SubmodUpdater(
+            submod="Discord RPC",
+            user_name="ImKventis",
+            repository_name="MONRPC",
+            update_dir=""
+        )
+
 init python in kventis_rpc:
     # JSON RPC for Discord
     from abc import abstractmethod

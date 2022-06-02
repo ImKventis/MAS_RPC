@@ -64,6 +64,7 @@ init python in kventis_rpc_reg:
         ("Dev Icon", "testicon", False, False),
         ("Chibi Monika", "chibi", False, False),
         ("Monika Blush", "monikablush", False, False),
+        ("Spaceroom", "spaceroom", False, False)
     ]
     
     # List of rooms id to text
