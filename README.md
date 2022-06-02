@@ -2,7 +2,7 @@
 A discord RPC client for a Rich pressence
 
 # Warning
-This submod is **NOT** ready for use and requires more testing before usage
+This submod is **NOT** ready for use and requires more testing.
 
 ## Details
 A RPC client allows Monika to add a custom status to your discord account! The submod updates the status every minute when you are not in conversation.
