@@ -125,13 +125,13 @@ init 5 python:
 
 
 label rpc_failed_custom_empty:
-    m "[player]... I'm sorry, I couldn't find the custom_presence.txt file."
-    m "because theres nothing in it."
-    m "To prevent further problems I have disabled custom rpc message for you."
+    m "[player]... I'm sorry! I couldn't get the custom_presence.txt file."
+    m "Because theres nothing in it..."
+    m "To prevent further problems, I have disabled custom rpc message for you."
     return
 
 label rpc_failed_custom_too_long:
-    m "[player]... I'm sorry, I couldn't find the custom_presence.txt file."
-    m "because it was too long."
-    m "To prevent further problems I have disabled custom rpc message for you."
+    m "[player]... I'm sorry! I couldn't get the custom_presence.txt file."
+    m "Because it was too long!"
+    m "To prevent further problems, I have disabled custom rpc message for you."
     return
