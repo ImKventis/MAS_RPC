@@ -29,5 +29,4 @@ Please read [this](https://github.com/ImKventis/MONRPC/blob/main/JSOHELP.MD) to 
 
 ### Examples of RPC
 
-<img src="https://imgur.com/SRUdpi9.jpg" alt="Image of RPC loading" style="width:200px;">
-<img src="https://imgur.com/KsxTANN.jpg" alt="Image of RPC idle" style="width:200px;">
+<img src="https://imgur.com/SRUdpi9.jpg" alt="Image of RPC loading" style="width:200px;"> <img src="https://imgur.com/KsxTANN.jpg" alt="Image of RPC idle" style="width:200px;">
