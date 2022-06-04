@@ -560,6 +560,31 @@ init python in kventis_rpc:
             self.s_sock.flush()
 
     def gen_client():
+        global client_id
+        from json import loads
+
+        # Allows for custom clients to be used
+        # Custom clients must have all the same images by default otherwise it will not work
+
+        custom_client_path = os.path.join(rpc_base, "./custom_client.json")
+        new_client_id = None
+        if os.path.exists(custom_client_path):
+            try:
+                f = open(custom_client_path)
+                f_str = f.read()
+                f.close()
+                client_data = loads(f_str)
+                new_client_id = client_data.get("id", None)
+                images = client_data.get("images", [])
+                for k,v in images.items():
+                    store.kventis_rpc_reg.ICON_MAP.append((k, v, False, False))
+            except Exception as e:
+                log('warn', 'Failed to load custom client.json ' + str(e))
+                pass
+        
+        if new_client_id is not None:
+            client_id = new_client_id
+
         # Unix pog 💪
         # - Someone prlly
         if renpy.windows:

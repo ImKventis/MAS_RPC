@@ -7,7 +7,7 @@
 
 #https://github.com/Monika-After-Story/MonikaModDev/blob/24f6643c5e80787d8c40f62ab7d53a1173f56d41/Monika%20After%20Story/game/zz_backgrounds.rpy
 #    class MASFilterableBackground(object):
-init python in kventis_rpc_reg:
+init -1 python in kventis_rpc_reg:
     import os
     import store
     
@@ -19,6 +19,14 @@ init python in kventis_rpc_reg:
     rpc_b_maps = os.path.join(rpc_maps, "./b/")
     rpc_r_maps = os.path.join(rpc_maps, "./r/")
     failed_make_paths = False
+
+    def log(msg_type, msg):
+        if msg_type == "info":
+            store.mas_submod_utils.submod_log.info("[Discord RPC] " + msg)
+        elif msg_type == "warn":
+            store.mas_submod_utils.submod_log.warning("[Discord RPC] " + msg)
+        else:
+            store.mas_submod_utils.submod_log.error("[Discord RPC] " + msg)
 
     def checkpath(path):
         global failed_make_paths
@@ -63,9 +71,9 @@ init python in kventis_rpc_reg:
     # (name, discordassname, False, False)
     ICON_MAP = [
         ("Ribbon", "ribbon", False, False),
-        ("Chibi Monika", "chibi", False, False),
-        ("Monika Blush", "monikablush", False, False),
-        ("Spaceroom", "spaceroom", False, False)
+        ("My Chibi", "chibi", False, False),
+        ("Me Blushing", "monikablush", False, False),
+        ("Spaceroom", "spaceroom", False, False),
     ]
     
     # List of rooms id to text
@@ -76,7 +84,7 @@ init python in kventis_rpc_reg:
     def load_map_file(m_type,name, map):
         from json import loads
         path = os.path.join(m_type, name)
-        store.kventis_rpc.log('info', path)
+        log('info', path)
         if os.path.exists(path):
             with open(path, "r") as f:
                 json_str = f.read()
@@ -84,17 +92,17 @@ init python in kventis_rpc_reg:
                 try:
                     j_map = loads(json_str)
                 except:
-                    store.kventis_rpc.log('warn', name + ' is not a vaild json file.')
+                    log('warn', name + ' is not a vaild json file.')
                 if j_map is not None:
                     map.update(j_map)
                 f.close()
         else:
-            store.kventis_rpc.log('warn', 'Could not load map file' + name)
+            log('warn', 'Could not load map file' + name)
 
     # Only a function because return cannot be used in init python:
     def load_maps():
         if failed_make_paths:
-            store.kventis_rpc.log('warn', "Failed to read one of the rpc_map paths. Custom Maps will be disabled")
+            log('warn', "Failed to read one of the rpc_map paths. Custom Maps will be disabled")
             return
 
         for file in os.listdir(rpc_b_maps):
@@ -104,34 +112,3 @@ init python in kventis_rpc_reg:
             load_map_file(rpc_r_maps, file, ROOM_TEXT_MAP)
 
     load_maps()
-
-
-init 5 python:
-    addEvent(
-        Event(
-            persistent.event_database,
-            eventlabel="rpc_failed_custom_empty"
-        )
-    )
-
-init 5 python:
-    addEvent(
-        Event(
-            persistent.event_database,
-            eventlabel="rpc_failed_custom_too_long"
-        )
-    )
-
-
-
-label rpc_failed_custom_empty:
-    m "[player]... I'm sorry! I couldn't get the custom_presence.txt file."
-    m "Because theres nothing in it..."
-    m "To prevent further problems, I have disabled custom rpc message for you."
-    return
-
-label rpc_failed_custom_too_long:
-    m "[player]... I'm sorry! I couldn't get the custom_presence.txt file."
-    m "Because it was too long!"
-    m "To prevent further problems, I have disabled custom rpc message for you."
-    return
