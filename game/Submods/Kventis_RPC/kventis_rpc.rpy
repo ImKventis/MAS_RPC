@@ -595,6 +595,8 @@ init python in kventis_rpc:
             return DiscordClientUnix() 
 
     client = gen_client()
+    # Could need custom later
+    read_custom()
 
     if store.persistent.rpc_enabled:
         client.start()
@@ -606,13 +608,11 @@ init python in kventis_rpc:
             update_activity,
             args=[client]
         )
-        # Important otherwise things get messy after a certain ammount of MAS restarts without computer reboot
+        
+        # Things get messy if too many connections are closed without discord knowing
         store.mas_submod_utils.registerFunction("quit", client.close)
 
         try:
             client.activity(loading_act)
         except Exception as e:
-            log('warn', 'Failed to set activity: ' + str(e))
-
-    if store.persistent.rpc_use_custom:
-        read_custom()
+            log('warn', 'Failed to set activity: ' + str(e))        
