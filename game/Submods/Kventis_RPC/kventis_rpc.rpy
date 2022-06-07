@@ -599,8 +599,6 @@ init python in kventis_rpc:
     read_custom()
 
     if store.persistent.rpc_enabled:
-        client.start()
-
         # Register functions first as Exception will prevent ticking
 
         store.mas_submod_utils.registerFunction(
@@ -611,6 +609,8 @@ init python in kventis_rpc:
         
         # Things get messy if too many connections are closed without discord knowing
         store.mas_submod_utils.registerFunction("quit", client.close)
+        
+        client.start()
 
         try:
             client.activity(loading_act)
