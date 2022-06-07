@@ -209,7 +209,7 @@ label monika_rpc_change_icon:
     $ from store import persistent
     $ from store.kventis_rpc_reg import ICON_MAP
     m 1hub "Alright!"
-    
+    m 1rub "I wonder what icon you chose..."
     show monika at t21
     call screen mas_gen_scrollable_menu(ICON_MAP, mas_ui.SCROLLABLE_MENU_TXT_MEDIUM_AREA, mas_ui.SCROLLABLE_MENU_XALIGN, ("Monika After Story logo", "def", False, False, 0))
     show monika at t11
@@ -221,5 +221,4 @@ label monika_rpc_change_icon:
 
     m 1dud "One moment..."
     m 1hub "The icon will update in the next minute or two!"
-    m 1rub "I wonder what icon you chose..."
     return # Return otherwise other labels start playing
