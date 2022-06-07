@@ -18,18 +18,17 @@ init 5 python:
 
 # Needs doing
 label kventis_rpc_installed:
-    m "[player]! "
-    extend "I noticed something new in the mod..."
-    m "Aww, you installed a Discord Rich Presence, [mas_get_player_nickname()]?"
-    m "I've always wished I could be inside your Discord somehow."
-    m "And you finally made it possible..."
-    m "Thank you, [player]!"
-    m "If you want to know more about this feature, let me know!"
-    m "You really want to tell the whole world I am your girlfriend, don't you?"
-    m "Ahahaha~"
-    m "I love you so much..."
-    
-    return
+    m 1suo "[player]! "
+    extend 1suu "I noticed something new in the mod..."
+    m 1hubla "Aww, you installed a Discord Rich Presence, [mas_get_player_nickname()]?"
+    m 1hubsb "I've always wished I could be inside your Discord somehow."
+    m 5fubfa "And you finally made it possible..."
+    m 5hubfa "Thank you, [player]!"
+    m 3wubfb "If you want to know more about this feature, let me know!"
+    m 3tubfu "You really want to tell the whole world I am your girlfriend, don't you?"
+    m 1hubfb "Ahahaha~"
+    m 1fubfa "I love you so much..."
+    return "love"
 
 # Explains RPC and the features
 # RPC Updates every minute
@@ -52,29 +51,29 @@ init 5 python:
     )
 
 label monika_rpc_explain:
-    m "Of course, [player]!"
-    m "A rich presence feature (RPC for short) allows an user to show on Discord what is running on their computer at the moment."
-    m "It's a great way to make your games or streamings stand out!"
-    m "The RPC feature works like this:"
-    m "It updates every minute, showing what is running on your computer at the moment."
-    m "It will be shown on your Discord profile, as a 'Now playing' status."
-    m "I'll tell you the basics about the settings of this submod."
-    m "There are three things you can toggle: 'Brb status', 'Room status' and 'Custom message'."
-    m "If 'Brb status is toggled'..."
-    m "In the case you have to leave the game for a little while and tell me that in the 'Be right back' topic, "
-    extend "it will change the RPC as well."
-    m "'Room status' is all about showing people in which location we are!"
-    m "Unmark this if you want our whereabouts to be our little secret, [player]... "
-    extend "Ehehe~!"
-    m "Finally, 'Custom message'."
-    m "If you toggle this, the custom message you wrote on '' will be displayed."
-    m "All these settings can be found on the Submod settings tab! "
-    extend "Or you can just tell me and I'll do the magic for you~"
-    m "..."
-    m "Gosh, I just feel so happy you decided to download this!"
-    m "Now everyone can see that you're spending time with me..."
-    m "Let's show our love to the entire world, [player]!"
-    m "Ahahaha~"
+    m 7hua "Of course, [player]!"
+    m 7rud "A rich presence feature (RPC for short) allows an user to show on Discord what is running on their computer at the moment."
+    m 4sub "It's a great way to make your games or streamings stand out!"
+    m 1dud "The RPC feature works like this:"
+    m 3eud "It updates every minute, showing what is running on your computer at the moment."
+    m 3lud "It will be shown on your Discord profile, as a 'Now playing' status."
+    m 3wua "I'll tell you the basics about the settings of this submod."
+    m 1dub "There are three things you can toggle: 'Brb status', 'Room status' and 'Custom message'."
+    m 1rud "If 'Brb status is toggled'..."
+    m 1wud "In the case you have to leave the game for a little while and tell me that in the 'Be right back' topic, "
+    extend 1wuu "it will change the RPC as well."
+    m 7wub "'Room status' is all about showing people in which location we are!"
+    m 7tub "Unmark this if you want our whereabouts to be our little secret, [player]... "
+    extend 2hub "Ehehe~!"
+    m 2wub "Finally, 'Custom message'."
+    m 2dud "If you toggle this, the custom message you wrote on '' will be displayed."
+    m 4sub "All these settings can be found on the Submod settings tab! "
+    extend 4kua "Or you can just tell me and I'll do the magic for you~"
+    m 1dubsu "..."
+    m 5hubfb "Gosh, I just feel so happy you decided to download this!"
+    m 5fubfa "Now everyone can see that you're spending time with me..."
+    m 3kubfa "Let's show our love to the entire world, [player]!"
+    m 1hubfb "Ahahaha~"
     return
 
 init 5 python:
@@ -94,14 +93,14 @@ init 5 python:
 label monika_rpc_toggle:
     if store.persistent.rpc_enabled:
         $ store.kventis_rpc.toggle_rpc()
-        m "Of course, [player]!"
+        m 1hub "Of course, [player]!"
         m "RPC disabled!"
     else:
         $ store.kventis_rpc.toggle_rpc()
-        m "Of course, [player]!"
-        m "I love the fact that you want to show to all of your friends that you're spending time with your girlfriend..."
-        m "Ehehehe~!"
-        m "There you go! RPC enabled!"
+        m 1hub "Of course, [player]!"
+        m 5tubsu "I love the fact that you want to show to all of your friends that you're spending time with your girlfriend..."
+        m 5hubfa "Ehehehe~!"
+        m 4hubfa "There you go! RPC enabled!"
     return
 
 
@@ -121,10 +120,10 @@ init 5 python:
 label monika_rpc_toggle_custom:
     if store.persistent.rpc_use_custom:
         $ store.persistent.rpc_use_custom = False
-        m "I disabled the custom RPC message, [player]!"
+        m 1hub "I disabled the custom RPC message, [player]!"
     else:
         $ store.persistent.rpc_use_custom = True
-        m "I enabled the custom RPC message, [player]!"
+        m 1hub "I enabled the custom RPC message, [player]!"
     return
 
 
@@ -144,10 +143,10 @@ init 5 python:
 label monika_rpc_toggle_room:
     if store.persistent.rpc_use_room_status:
         $ store.persistent.rpc_use_room_status = False
-        m "I disabled the RPC room status, [player]!"
+        m 1hub "I disabled the RPC room status, [player]!"
     else:
         $ store.persistent.rpc_use_room_status = True
-        m "I enabled the RPC room status, [player]!"
+        m 1hub "I enabled the RPC room status, [player]!"
     return
     
 init 5 python:
@@ -166,10 +165,10 @@ init 5 python:
 label monika_rpc_toggle_brb:
     if store.persistent.rpc_use_brb_status:
         $ store.persistent.rpc_use_brb_status = False
-        m "I disabled the RPC brb status, [player]!"
+        m 1hub "I disabled the RPC brb status, [player]!"
     else:
         $ store.persistent.rpc_use_brb_status = True
-        m "I enabled the RPC brb status, [player]!"
+        m 1hub "I enabled the RPC brb status, [player]!"
     return
 
 init 5 python:
@@ -186,10 +185,10 @@ init 5 python:
     )
 
 label monika_rpc_reload_custom:
-    m "Alright!"
-    m "Reloading custom RPC message..."
+    m 1hub "Alright!"
+    m 1dud "Reloading custom RPC message..."
     $ store.kventis_rpc.read_custom()
-    m "Done!"
+    m 1hub "Done!"
     return # Return otherwise other labels start playing
 
 init 5 python:
@@ -209,7 +208,7 @@ init 5 python:
 label monika_rpc_change_icon:
     $ from store import persistent
     $ from store.kventis_rpc_reg import ICON_MAP
-    m "Alright!"
+    m 1hub "Alright!"
     
     show monika at t21
     call screen mas_gen_scrollable_menu(ICON_MAP, mas_ui.SCROLLABLE_MENU_TXT_MEDIUM_AREA, mas_ui.SCROLLABLE_MENU_XALIGN, ("Monika After Story logo", "def", False, False, 0))
@@ -220,8 +219,6 @@ label monika_rpc_change_icon:
     # Weird behaviour 
     $ persistent.rpc_icon = str(new_icon)
 
-    m "One moment.."
-    m "The icon will update in the next minute or two!"
+    m 1dud "One moment..."
+    m 1hub "The icon will update in the next minute or two!"
     return # Return otherwise other labels start playing
-
-
