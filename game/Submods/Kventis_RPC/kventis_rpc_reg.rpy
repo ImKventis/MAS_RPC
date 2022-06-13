@@ -63,7 +63,18 @@ init -1 python in kventis_rpc_reg:
         '_mas_watching_you_draw': ['Drawing with {monika}', '{monika} is watching me draw!'],
         '_mas_watching_you_game': ['Gaming with {monika}', '{monika} is my player 2!'],
         '_mas_watching_you_code': ['Creating bugs with {monika}', 'Developing with {monika}', 'Coding with {monika}', '127.0.0.1/{monika}', 'def {monika}() -> \'love\''],
-        '_watching': ['Watching something with {monika}', 'Netflix and Chill with {monika}']
+        '_watching': ['Watching something with {monika}', 'Netflix and Chill with {monika}'],
+        # u/my-otter-self 's brb submods
+        'otter_brb_calling_callback' : ['Someone called me', 'AFK'],
+        'otter_brb_food_callback' : ['Grabbing a snack to eat with {monika}', '{monika} is waiting me come back from my snack'],
+        'otter_brb_journal_callback' : ['Sharing my journal with {monika}', 'Sharing my daily thoughts with {monika}'],
+        'otter_brb_liedown_callback' : ['Napping with {monika}', 'Snuggling with {monika}'], 
+        'otter_brb_nails_callback' : ['Doing my nails with {monika}', '{monika} is watching me paint my nails'],
+        'otter_brb_plants_callback' : ['Watering my plants', 'Taking care of my plant friends'],
+        'otter_brb_socials_callback' : ['Doomscrolling', 'Checking my socials with {monika}'],
+        'otter_brb_stim_callback' : ['Stimming with {monika}', '{monika} is waiting while I stim'],
+        'otter_brb_stretch_callback' : ['Stretching my legs', 'Touching grass'],
+        'otter_brb_vc_callback' : ['On a date with {monika} and my friends', 'Voice chatting with friends']
     }
 
     # Map of icons to choose from
