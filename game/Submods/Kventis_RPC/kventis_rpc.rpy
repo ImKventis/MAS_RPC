@@ -165,9 +165,9 @@ init python in kventis_rpc:
         if room_text is not None:
             state = room_text
         elif room is not None:
-            state = "In the " + room.prompt
+            state = "At the " + room.prompt
         else:
-            state = "In the spaceroom"
+            state = "At the spaceroom"
         return state
 
     def check_details():
