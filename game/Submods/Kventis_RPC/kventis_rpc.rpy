@@ -21,8 +21,12 @@ init -989 python:
         store.sup_utils.SubmodUpdater(
             submod="Discord RPC",
             user_name="ImKventis",
-            repository_name="MONRPC",
-            update_dir=""
+            repository_name="MAS_RPC",
+            update_dir="/Submods/Kventis_RPC"
+            extraction_depth=3,
+            redirected_files=(
+                "README.md",
+                "LICENSE.txt"
         )
 
 init python in kventis_rpc:
