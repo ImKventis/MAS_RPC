@@ -45,9 +45,6 @@ This submod was developed by these people:
 
 [@my-otter-self](https://github.com/my-otter-self) is the sole mantainer of this project, as [@ImKventis](https://github.com/ImKventis) - the main concept creator and coder - won't be able to update it anymore.
 
-**Note:** CC BY-NC-ND 4.0 only covers content created by authors, contributors or maintainers of this mod (repository) and does not cover
-anything that was created by third party
-
 ## ⚠️ Submod framework
 
 Please read [the wiki](https://github.com/ImKventis/MAS_RPC/wiki/Submod-Framework) to understand the jsons and updating activity!
