@@ -47,7 +47,7 @@ init python in kventis_rpc:
     client = None
     # Folder stuff
     rpc_base = os.path.join(renpy.config.basedir, "./rpc/")
-    custom_rpc_file_path = os.path.join(rpc_base, "custom_presense.txt")
+    custom_rpc_file_path = os.path.join(rpc_base, "custom_presence.txt")
     custom_rpc_file = None
     block_value = 0
     cur_act = {}
