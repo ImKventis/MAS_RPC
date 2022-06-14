@@ -43,7 +43,7 @@ This submod was developed by these people:
   </a>
 </p>
 
-[@my-otter-self](https://github.com/my-otter-self) is the sole mantainer of this project, as @ImKventis, the main concept creator and coder won't be able to update it anymore.
+[@my-otter-self](https://github.com/my-otter-self) is the sole mantainer of this project, as [@ImKventis](https://github.com/ImKventis) - the main concept creator and coder - won't be able to update it anymore.
 
 **Note:** CC BY-NC-ND 4.0 only covers content created by authors, contributors or maintainers of this mod (repository) and does not cover
 anything that was created by third party (as attributed in [Credits](https://github.com/my-otter-self/MAS_selfharm/wiki/%F0%9F%93%9D-Credits) wiki page.)
