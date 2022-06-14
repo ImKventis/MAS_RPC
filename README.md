@@ -39,7 +39,7 @@ This submod was developed by these people:
 
 <p align="center">
   <a href="https://github.com/ImKventis/MAS_RPC/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=mImKventis/MAS_RPCm&max=6" />
+    <img src="https://contrib.rocks/image?repo=ImKventis/MAS_RPC&max=6" />
   </a>
 </p>
 
