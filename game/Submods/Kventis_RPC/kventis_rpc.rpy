@@ -28,6 +28,7 @@ init -989 python:
                 "README.md",
                 "LICENSE.txt"
         )
+)
 
 init python in kventis_rpc:
     # JSON RPC for Discord
