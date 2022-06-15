@@ -3,16 +3,13 @@
 <h3 align="center">"You really want to tell the whole world I am your girlfriend, don't you? Ahahaha~" - Monika</h3>
 <br>
 <p align="center">
-  <a href="https://github.com/my-otter-self/monika_selfharm/actions/workflows/lint-on-push.yml">
-    <img alt="Build status" src="https://img.shields.io/github/workflow/status/ImKventis/MAS_RPC/Lint%20source%20tree%20on%20push/main">
-  </a>
-  <a href="https://github.com/my-otter-selfMAS_RPC/releases/latest">
+  <a href="https://github.com/imkventis/mas_rpc/releases/latest">
     <img alt="Latest release" src="https://img.shields.io/github/v/release/ImKventis/MAS_RPC">
   </a>
   <a href="https://mon.icu/discord">
     <img alt="Discord server" src="https://discordapp.com/api/guilds/970747033071804426/widget.png?style=shield">
   </a>
-  <a href="https://github.com/my-otter-self/MAS_selfharm/blob/main/LICENSE.txt">
+  <a href="https://github.com/imkventis/mas_rpc/blob/main/LICENSE.txt">
     <img alt="Creative Commons BY-NC-ND 4.0 license badge" src="https://img.shields.io/badge/License-CC_BY--NC--ND_4.0-lightgrey.svg">
   </a>
 </p>
