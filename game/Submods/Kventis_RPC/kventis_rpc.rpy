@@ -8,7 +8,7 @@ init -990 python in mas_submod_utils:
         author="Kventis",
         name="Discord RPC",
         description="Allows Monika to access your discord and change your status.\nLet the world know!",
-        version="1.0.0",
+        version="1.0.1",
         dependencies={},
         settings_pane="kventis_rpc_setting_pane",
         version_updates={}
