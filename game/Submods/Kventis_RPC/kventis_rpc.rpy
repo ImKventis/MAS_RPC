@@ -22,7 +22,7 @@ init -989 python:
             submod="Discord RPC",
             user_name="ImKventis",
             repository_name="MAS_RPC",
-            update_dir="/Submods/Kventis_RPC"
+            update_dir="/Submods/Kventis_RPC",
             extraction_depth=3,
             redirected_files=(
                 "README.md",
