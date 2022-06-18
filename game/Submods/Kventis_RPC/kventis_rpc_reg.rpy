@@ -74,9 +74,9 @@ init -1 python in kventis_rpc_reg:
         'otter_brb_socials_callback' : ['Doomscrolling', 'Checking my socials with {monika}'],
         'otter_brb_stim_callback' : ['Stimming with {monika}', '{monika} is waiting while I stim'],
         'otter_brb_stretch_callback' : ['Stretching my legs', 'Touching grass'],
-        'otter_brb_vc_callback' : ['On a date with {monika} and my friends', 'Voice chatting with friends']
+        'otter_brb_vc_callback' : ['On a date with {monika} and my friends', 'Voice chatting with friends'],
         #confiscatedharddrive additions uwu
-        'chd_brb_overstimulated_callback' : ['Taking break due to overstimulation', 'Destressing with {monika}']
+        'chd_brb_overstimulated_callback' : ['Taking a break due to overstimulation', 'Destressing with {monika}'],
         'chd_brb_panic_callback' : ['{monika} is helping me get through a panic attack', 'Calming down with {monika}']
     }
 
