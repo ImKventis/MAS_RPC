@@ -76,8 +76,8 @@ init -1 python in kventis_rpc_reg:
         'otter_brb_stretch_callback' : ['Stretching my legs', 'Touching grass'],
         'otter_brb_vc_callback' : ['On a date with {monika} and my friends', 'Voice chatting with friends'],
         #confiscatedharddrive additions uwu
-        'chd_brb_overstimulated_callback' : ['Taking a break due to overstimulation', 'Destressing with {monika}'],
-        'chd_brb_panic_callback' : ['{monika} is helping me get through a panic attack', 'Calming down with {monika}']
+        'chd_brb_overstimulated_callback' : ['Break due to overstimulation', 'Destressing with {monika}'],
+        'chd_brb_panic_callback' : ['Going through a panic attack', 'Calming down with {monika}']s
     }
 
     # Map of icons to choose from
