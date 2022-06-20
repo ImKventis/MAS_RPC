@@ -170,7 +170,7 @@ init python in kventis_rpc:
         if room_text is not None:
             state = room_text
         elif room is not None:
-            state = "At the " + room.prompt
+            state = "At the " + renpy.substitute(room.prompt)
         else:
             state = "At the spaceroom"
         return state
