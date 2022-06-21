@@ -146,20 +146,20 @@ init python in kventis_rpc:
                 details = get_from_map('_mas_watching_you_game', BRB_TEXT_MAP)
             else:
                 details = get_from_map('_watching', BRB_TEXT_MAP)
-
+        
         elif cur_brb_label == last_brb_label:
             details = last_brb
-    
+
         else:
             brb_text = get_from_map(cur_brb_label, BRB_TEXT_MAP)
             if brb_text is not None:
                 details = brb_text
             else:
-                details = "AFK"
+                details = 'AFK'
 
         last_brb = details
         last_brb_label = cur_brb_label
-        return details     
+        return details
 
     def check_brb():
         global last_brb_label
