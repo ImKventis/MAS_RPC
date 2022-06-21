@@ -155,11 +155,47 @@ init python in kventis_rpc:
             if brb_text is not None:
                 details = brb_text
             else:
-                details = "Afk"
+                details = "AFK"
 
         last_brb = details
         last_brb_label = cur_brb_label
-        return details      
+        return details     
+
+    def check_brb():
+        global last_brb_label
+        global last_brb
+        from store import kventis_rpc_reg, persistent, mas_idle_mailbox
+        from store.kventis_rpc_reg import BRB_TEXT_MAP
+
+        cur_brb_label = mas_idle_mailbox.read(3)
+        details = None
+
+        #please don't break stuff
+        if cur_brb_label == "chd_listen_together_callback":
+            if persistent._mas_listening_to_music:
+                details = get_from_map('_mas_listening_to_music', BRB_TEXT_MAP)
+            elif persistent._mas_listening_to_podcast:
+                details = get_from_map('_mas_listening_to_podcast', BRB_TEXT_MAP)
+            elif persistent._mas_listening_to_drama:
+                details = get_from_map('_mas_listening_to_drama', BRB_TEXT_MAP)
+            elif persistent._mas_listening_to_radio:
+                details = get_from_map('_mas_listening_to_radio', BRB_TEXT_MAP)
+            else:
+                details = get_from_map('_listening', BRB_TEXT_MAP)
+
+        elif cur_brb_label == last_brb_label:
+            details = last_brb
+
+        else:
+            brb_text = get_from_map(cur_brb_label, BRB_TEXT_MAP)
+            if brb_text is not None:
+                details = brb_text
+            else:
+                details = 'AFK'
+
+        last_brb = details
+        last_brb_label = cur_brb_label
+        return details
 
     def check_room():
         from store import persistent, kventis_rpc_reg, mas_background
