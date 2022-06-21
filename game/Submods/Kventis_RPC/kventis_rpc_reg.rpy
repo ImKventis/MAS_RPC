@@ -60,6 +60,7 @@ init -1 python in kventis_rpc_reg:
         'monika_writing_idle_callback' : ['Writing with {monika}', 'Writing {monika} a love poem'],
         # u/geneTechnician watching SubMod
         # Suggested by u/lost_localcat
+        'watching_something_callback' : ['Watching something with {monika}', 'Netflix and Chill with {monika}'],
         '_mas_watching_you_draw': ['Drawing with {monika}', '{monika} is watching me draw!'],
         '_mas_watching_you_game': ['Gaming with {monika}', '{monika} is my player 2!'],
         '_mas_watching_you_code': ['Creating bugs with {monika}', 'Developing with {monika}', 'Coding with {monika}', '127.0.0.1/{monika}', 'def {monika}() -> \'love\''],
