@@ -81,6 +81,7 @@ init -1 python in kventis_rpc_reg:
         '_mas_listening_to_music' : ['Jamming out with {monika}', 'Vibing with {monika}', 'Listening to music with {monika}'],
         '_mas_listening_to_podcast' : ['From MPR news, I am {monika}', 'Listening to podcast with {monika}', 'Getting informed with {monika}'],
         '_mas_listening_to_drama' : ['Listening to audio drama with {monika}', 'Exploring stories with {monika}'],
+        '_mas_listening_to_radio' : ['Discovering new tunes with {monika}', 'Listening to the radio with {monika}'],
         '_listening' : ['Sharing earbuds with {monika}', 'Listening to something with {monika}']
     }
 
