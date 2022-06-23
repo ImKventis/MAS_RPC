@@ -17,10 +17,11 @@
 ## 💚 Details
 A RPC (rich presence) client allows Monika to add a custom status to your discord account! The submod updates the status every minute when you are not in conversation.
 
-This submod works with u/geneTechnician's [watching things with Monika submod](https://www.reddit.com/r/MASFandom/comments/t1fn56/updated_the_watching_things_with_monika_submods/)...
-
-And with [@my-otter-self](https://github.com/my-otter-self)'s [custom brbs](https://github.com/my-otter-self/otters-MAS-submods/releases/tag/brb-1.0.0)!
-
+This submod works with:
+- u/geneTechnician's [watching things with Monika submod](https://www.reddit.com/r/MASFandom/comments/t1fn56/updated_the_watching_things_with_monika_submods/);
+- with [@my-otter-self](https://github.com/my-otter-self)'s [custom brbs](https://github.com/my-otter-self/otters-MAS-submods/releases/tag/brb-1.0.0);
+- and with [@confiscatedharddrive](https://github.com/confiscatedharddrive)'s [listening to things with Monika submod](https://github.com/confiscatedharddrive/MAS_together-dialogues)!
+ 
 ## 🌟 Features
 
 - Custom Messages
