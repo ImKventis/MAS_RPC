@@ -74,7 +74,16 @@ init -1 python in kventis_rpc_reg:
         'otter_brb_socials_callback' : ['Doomscrolling', 'Checking my socials with {monika}'],
         'otter_brb_stim_callback' : ['Stimming with {monika}', '{monika} is waiting while I stim'],
         'otter_brb_stretch_callback' : ['Stretching my legs', 'Touching grass'],
-        'otter_brb_vc_callback' : ['On a date with {monika} and my friends', 'Voice chatting with friends']
+        'otter_brb_vc_callback' : ['On a date with {monika} and my friends', 'Voice chatting with friends'],
+        #confiscatedharddrive additions uwu
+        'chd_otter_brb_overstimulated_callback' : ['Break due to overstimulation', 'De-stressing with {monika}'],
+        'chd_otter_brb_panic_callback' : ['Going through a panic attack', 'Calming down with {monika}'],
+        'chd_listening_something_brb_callback' : ['Sharing earbuds with {monika}', 'Listening to something with {monika}'],
+        '_mas_listening_to_music' : ['Jamming out with {monika}', 'Vibing with {monika}', 'Listening to music with {monika}'],
+        '_mas_listening_to_podcast' : ['From MPR news, I am {monika}', 'Listening to podcast with {monika}', 'Getting informed with {monika}'],
+        '_mas_listening_to_drama' : ['Listening to audio drama with {monika}', 'Exploring stories with {monika}'],
+        '_mas_listening_to_radio' : ['Discovering new tunes with {monika}', 'Listening to the radio with {monika}'],
+        '_listening' : ['Sharing earbuds with {monika}', 'Listening to something with {monika}']
     }
 
     # Map of icons to choose from
