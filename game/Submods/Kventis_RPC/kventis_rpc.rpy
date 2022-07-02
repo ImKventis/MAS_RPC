@@ -8,7 +8,7 @@ init -990 python in mas_submod_utils:
         author="Kventis",
         name="Discord RPC",
         description="Allows Monika to access your discord and change your status.\nLet the world know!",
-        version="1.0.2",
+        version="1.0.3",
         dependencies={},
         settings_pane="kventis_rpc_setting_pane",
         version_updates={}
@@ -115,7 +115,7 @@ init python in kventis_rpc:
     def check_ani():
         from store import mas_anni
         if mas_anni.isAnni():
-            return "Today is our " + mas_anni.anniCount() + " year anniversary!"
+            return "Today is our " + str(mas_anni.anniCount()) + " year anniversary!"
         if mas_anni.isAnniSixMonth():
             return "Today is our 6 month anniversary!"
         if mas_anni.isAnniThreeMonth():
