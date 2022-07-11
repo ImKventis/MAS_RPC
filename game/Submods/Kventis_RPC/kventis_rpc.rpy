@@ -48,7 +48,7 @@ init python in kventis_rpc:
             store.mas_submod_utils.submod_log.error("[Discord RPC] " + msg)
 
     # Client stuff
-    client_id = '977282947981910026'
+    client_id = '986417525447335957'
     client = None
     # Folder stuff
     rpc_base = os.path.join(renpy.config.basedir, "./rpc/")
