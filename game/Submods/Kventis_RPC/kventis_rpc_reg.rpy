@@ -94,6 +94,15 @@ init -1 python in kventis_rpc_reg:
         ("My Chibi", "chibi", False, False),
         ("Me Blushing", "monikablush", False, False),
         ("Spaceroom", "spaceroom", False, False),
+        ("Emoji", "emoji", False, False),
+        ("Just Monika", "justmonika", False, False),
+        ("Nesoberi", "nesoberi", False, False),
+        ("DDLC+", "plus", False, False),
+        ("Pout", "pout", False, False),
+        ("Smile", "smile", False, False),
+        ("Stare", "stare", False, False),
+        ("Valentines", "valentines", False, False),
+        ("You're Mine", "youremine", False, False),
     ]
     
     # List of rooms id to text
