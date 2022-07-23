@@ -5,16 +5,11 @@
 #get_idle_cb
 #_mas_idle_data.read(3) = get currenet label
 
-#https://github.com/Monika-After-Story/MonikaModDev/blob/24f6643c5e80787d8c40f62ab7d53a1173f56d41/Monika%20After%20Story/game/zz_backgrounds.rpy
-#    class MASFilterableBackground(object):
 init -1 python in kventis_rpc_reg:
     import os
     import store
     
     # Have to manually add Brbs its kinda cringe
-    # Op have a custom json which can add other labels to this map
-    # Folder of jsons to make submodding easier
-    # probs rpc/maps/b/
     rpc_maps = os.path.join(renpy.config.basedir, "./rpc/maps/")
     rpc_b_maps = os.path.join(rpc_maps, "./b/")
     rpc_r_maps = os.path.join(rpc_maps, "./r/")
@@ -47,7 +42,7 @@ init -1 python in kventis_rpc_reg:
     # Thanks to otter-self again for expanding these.
     BRB_TEXT_MAP = {
         'monika_brb_idle_callback' : 'AFK',
-        'monika_writing_idle_callback' : ['Writing with {monika}', 'Writing {monika} a love poem'],
+        'monika_idle_writing_callback' : ['Writing with {monika}', 'Writing {monika} a love poem'],
         'monika_idle_game_callback' : ['Gaming with {monika}', '{monika} is my player 2!'],
         'monika_idle_coding_callback' : ['Creating bugs with {monika}', 'Developing with {monika}', 'Coding with {monika}', '127.0.0.1/{monika}', 'def {monika}() -> \'love\''],
         'monika_idle_reading_callback': ['Reading with {monika}', 'Reading {monika} a story'],
@@ -57,7 +52,6 @@ init -1 python in kventis_rpc_reg:
         'monika_idle_homework_callback' : ['Doing homework', 'Learning with {monika}', 'Smart time with {monika}'],
         'monika_idle_working_callback' : ['Working on something', 'My wife {monika} is waiting me come home from work!'],
         'monika_idle_screen_break_callback' : ['Taking a break from the screen', 'Touching grass'],
-        'monika_writing_idle_callback' : ['Writing with {monika}', 'Writing {monika} a love poem'],
         # u/geneTechnician watching SubMod
         # Suggested by u/lost_localcat
         '_mas_watching_you_draw': ['Drawing with {monika}', '{monika} is watching me draw!'],

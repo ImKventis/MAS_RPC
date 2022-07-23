@@ -1,7 +1,8 @@
-
-# Submod made with love by u/KventisAndM and with help from u/my-otter-self
-# https://github.com/ImKventis
-
+#
+# █▄▀ █░█ ▀█▀             Written by ImKventis,my-otter-self + maintained by my-otter-self
+# █░█ ▀▄▀ ░█░             https://github.com/ImKventis
+# + my-otter-self         https://github.com/my-otter-self
+#
 
 init -990 python in mas_submod_utils:
     Submod(
@@ -15,7 +16,6 @@ init -990 python in mas_submod_utils:
     )
 
 # Updater 
-# 0 Idea if this works
 init -989 python:
     if store.mas_submod_utils.isSubmodInstalled("Submod Updater Plugin"):
         store.sup_utils.SubmodUpdater(
